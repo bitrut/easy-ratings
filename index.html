@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>        
+        <!-- Dependencies -->
+        <script src="DataTables-1.7.4/media/js/jquery.dataTables.min.js"></script>
+        <style type="text/css" title="currentStyle">
+		@import "DataTables-1.7.4/media/css/demo_page.css";
+		@import "DataTables-1.7.4/media/css/demo_table.css";
+	</style>
+
+        <style>            
+            .dragover {
+                border-color: red;
+            }
+        </style>
+
+    </head>
+    <body ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);">
+        <div id="demo">
+            <table class="display" id="example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+						<th>Year</th>
+						<th>Genre</th>
+						<th>Director</th>
+						<th>Actors</th>
+                        <th>Rating</th>						
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript">
+			function filenameToYear(filename) {
+				year = filename.match(/\d{4}/);				
+				return year;
+			}			
+			function filenameToTitle(filename) {											
+				filename = filename.replace(/(\d{4}|\[|\(|dvd).*/i, '');
+				filename = filename.replace(/[\.\s]/g, '+');
+				return filename;
+			}
+			function filenameToUrl(filename) {
+				var url = 'http://www.imdbapi.com/?';
+				var year = filenameToYear(filename);				
+				if (year) {
+					url = url + 'y=' + year + '&';
+				}
+				var title = 't=' + filenameToTitle(filename);
+				url = url + title + '&callback=?';
+				console.log(url);
+				return url;
+			}
+			function getMovieInfo(url) {
+				$.getJSON(url, function(data){				
+					$('#example').dataTable().
+						fnAddData( ['<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
+					data.Year, data.Genre, data.Director, data.Actors, data.Rating] );
+				});
+			}
+			function handleDrop(ev) {
+				$(ev.target).removeClass('dragover');
+				var files = ev.dataTransfer.files;
+                console.log(files);
+               	timeout = 0;
+                for (var i = 0, f; f = files[i]; i++) {
+                	var url = filenameToUrl(f.name);
+                	getMovieInfo(url);
+                }             
+                event.stopPropagation();
+                return false;
+            }
+                
+		
+            $(document).ready(function() {
+                $('#example').dataTable({
+                    "bPaginate": false,
+                    "bLengthChange": false,
+                    "bProcessing": true
+                });            
+            });
+        </script>
+    </body>
+</html>
