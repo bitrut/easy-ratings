@@ -1,12 +1,14 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>        
         <!-- Dependencies -->
-        <script src="DataTables-1.7.4/media/js/jquery.dataTables.min.js"></script>
+        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>
         <style type="text/css" title="currentStyle">
-		@import "DataTables-1.7.4/media/css/demo_page.css";
-		@import "DataTables-1.7.4/media/css/demo_table.css";
-	</style>
+			@import "http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_page.css";
+			@import "http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css";
+		</style>
 
         <style>            
             .dragover {
@@ -20,6 +22,7 @@
             <table class="display" id="example">
                 <thead>
                     <tr>
+						<th>Poster</th>
                         <th>Title</th>
 						<th>Year</th>
 						<th>Genre</th>
@@ -56,7 +59,8 @@
 			function getMovieInfo(url) {
 				$.getJSON(url, function(data){				
 					$('#example').dataTable().
-						fnAddData( ['<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
+						fnAddData( ['<img src="'+data.Poster+'" width="100"/>',
+						'<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
 					data.Year, data.Genre, data.Director, data.Actors, data.Rating] );
 				});
 			}
