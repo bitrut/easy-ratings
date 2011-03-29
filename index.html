@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+        <title>Easy Ratings</title>
+        <link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_page.css"/>
+    	<link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css"/>
 		<meta charset="utf-8" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>        
-        <!-- Dependencies -->
-        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>
-        <style type="text/css" title="currentStyle">
-			@import "http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_page.css";
-			@import "http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css";
-		</style>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>        
         <style>            
             .dragover {
                 border-color: red;
             }
         </style>
-
     </head>
     <body ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);">
         <div id="demo">
             <table class="display" id="example">
                 <thead>
                     <tr>
-						<th>Poster</th>
                         <th>Title</th>
 						<th>Year</th>
 						<th>Genre</th>
@@ -59,8 +54,7 @@
 			function getMovieInfo(url) {
 				$.getJSON(url, function(data){				
 					$('#example').dataTable().
-						fnAddData( ['<img src="'+data.Poster+'" width="100"/>',
-						'<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
+						fnAddData( ['<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
 					data.Year, data.Genre, data.Director, data.Actors, data.Rating] );
 				});
 			}
