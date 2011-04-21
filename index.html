@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);">
 	<head>
         <title>Easy Ratings</title>
         <link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_page.css"/>
@@ -11,9 +11,12 @@
             .dragover {
                 border-color: red;
             }
+            html {
+            	min-height: 100%;
+            }
         </style>
     </head>
-    <body ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);">
+    <body>
         <div id="demo">
             <table class="display" id="example">
                 <thead>
