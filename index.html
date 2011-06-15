@@ -1,87 +1,78 @@
-<!DOCTYPE html>
-<html lang="en" ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);">
-	<head>
-        <title>Easy Ratings</title>
-        <link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_page.css"/>
-    	<link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css"/>
-		<meta charset="utf-8" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>        
-        <style>            
-            .dragover {
-                border-color: red;
-            }
-            html {
-            	min-height: 100%;
-            }
-        </style>
+<!doctype html>
+
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang=en><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang=en><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang=en><![endif]-->
+<!--[if gt IE 8]><!--> <html class=no-js lang=en ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);"> <!--<![endif]-->
+    <head>
+        <meta charset=utf-8>
+
+        
+        <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+
+        <title></title>
+        <meta name=description content="Get info and ratings of your movies by simple drag&amp;drop your files.">
+        <meta name=author content="Paweł Kowalski">
+
+        
+        <meta name=viewport content="width=device-width, initial-scale=1.0">
+
+        
+
+        
+        <link rel=stylesheet href="css/84ca51bf917c7e84eb7a31d770ce08a96c0ea943.css">
+        <link rel=stylesheet type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css"/>
+
+        
+
+        
+        <script src="js/libs/modernizr-2.0.min.js"></script>
+        <script src="js/libs/respond.min.js"></script>
     </head>
+
     <body>
-        <div id="demo">
-            <table class="display" id="example">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-						<th>Year</th>
-						<th>Genre</th>
-						<th>Director</th>
-						<th>Actors</th>
-                        <th>Rating</th>						
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <script type="text/javascript">
-			function filenameToYear(filename) {
-				year = filename.match(/\d{4}/);				
-				return year;
-			}			
-			function filenameToTitle(filename) {											
-				filename = filename.replace(/(\d{4}|\[|\(|dvd).*/i, '');
-				filename = filename.replace(/[\.\s]/g, '+');
-				return filename;
-			}
-			function filenameToUrl(filename) {
-				var url = 'http://www.imdbapi.com/?';
-				var year = filenameToYear(filename);				
-				if (year) {
-					url = url + 'y=' + year + '&';
-				}
-				var title = 't=' + filenameToTitle(filename);
-				url = url + title + '&callback=?';
-				console.log(url);
-				return url;
-			}
-			function getMovieInfo(url) {
-				$.getJSON(url, function(data){				
-					$('#example').dataTable().
-						fnAddData( ['<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
-					data.Year, data.Genre, data.Director, data.Actors, data.Rating] );
-				});
-			}
-			function handleDrop(ev) {
-				$(ev.target).removeClass('dragover');
-				var files = ev.dataTransfer.files;
-                console.log(files);
-               	timeout = 0;
-                for (var i = 0, f; f = files[i]; i++) {
-                	var url = filenameToUrl(f.name);
-                	getMovieInfo(url);
-                }             
-                ev.stopPropagation();
-                return false;
-            }
-                
-		
-            $(document).ready(function() {
-                $('#example').dataTable({
-                    "bPaginate": false,
-                    "bLengthChange": false,
-                    "bProcessing": true
-                });            
-            });
-        </script>
+
+        <div id=container>
+            <header>
+
+            </header>
+            <div id=main role=main>
+                <div id=demo>
+                    <table class=display id=main_table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Genre</th>
+                                <th>Director</th>
+                                <th>Actors</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <footer>
+
+            </footer>
+        </div> 
+
+
+        
+
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script>window.jQuery||document.write('<script src="js/libs/jquery-1.6.1.min.js"><\/script>');</script>
+        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>
+
+
+        <script src='js/fac42db95ab8f3f2240c6e5d54b439c28650d6f8.js'></script>
+
+
+        
+        <script>var _gaq=[["_setAccount","UA-8177602-6"],["_trackPageview"],["_trackPageLoadTime"]];(function(e,a){var c=e.createElement(a),b=e.getElementsByTagName(a)[0];c.async=1;c.src=("https:"==location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";b.parentNode.insertBefore(c,b)}(document,"script"));</script>
+
     </body>
 </html>
