@@ -1,9 +1,21 @@
+table = $('#main-table');
+
+$(document).ready(function() {
+	$.fn.dataTableExt.oStdClasses.sSortAsc  = "headerSortUp";
+	$.fn.dataTableExt.oStdClasses.sSortDesc  = "headerSortDown";
+
+    $('#main-table').dataTable({
+        "bPaginate": false
+    });
+});
+
+
 function filenameToYear(filename) {
     year = filename.match(/\d{4}/);
     return year;
 }
 function filenameToTitle(filename) {
-    filename = filename.replace(/(\d{4}|\[|\(|dvd).*/i, '');
+    filename = filename.replace(/(\d{4}|\[|\(|dvd|bdrip|r5).*/i, '');	
     filename = filename.replace(/[\.\s]/g, '+');
     return filename;
 }
@@ -15,34 +27,49 @@ function filenameToUrl(filename) {
     }
     var title = 't=' + filenameToTitle(filename);
     url = url + title + '&callback=?';
-    console.log(url);
     return url;
 }
-function getMovieInfo(url) {
-    $.getJSON(url, function(data){
-        $('#main_table').dataTable().
-        fnAddData( ['<a href="http://www.imdb.com/title/'+data.ID+'/">'+data.Title+'</a>',
-            data.Year, data.Genre, data.Director, data.Actors, data.Rating] );
+function getMovieInfo(file) {
+    $.getJSON(file['url'], function(data){
+		if (data["Response"]!="Parse Error"){
+			table.dataTable().
+			fnAddData( ['<a class="title" href="http://www.imdb.com/title/'+data.ID+'/" title="'+file["name"]+'">'+data.Title+'</a>',
+				data.Year, data.Genre, data.Director, data.Actors, data.Rating,
+				'<a class="close" href="#" onclick="deleteRecord(this)">&times;</a>'] );
+		} else {
+			$('#message-box').append('<div class="alert-message error" data-alert="alert">\
+				<a class="close" href="#">&times;</a>\
+				<p>Oh snap! Info for <strong>'+file['name']+'</strong> couldn\'t be found.</p>\
+				</div>');
+		}
     });
 }
 function handleDrop(event) {
-    $(event.target).removeClass('dragover');
+	$('#drop-box').hide();
+	$('#main-table_wrapper').show();
     var files = event.dataTransfer.files;
-    console.log(files);
     timeout = 0;
     for (var i = 0, f; f = files[i]; i++) {
-        var url = filenameToUrl(f.name);
-        getMovieInfo(url);
+        f['url'] = filenameToUrl(f.name);
+		console.log(f['url']);
+        getMovieInfo(f);
     }
     event.stopPropagation();
     return false;
 }
 
+function handleDragEnter(event) {
+    $('#drop-box').addClass('dragover');
+	event.stopPropagation();
+    return false;
+}
 
-$(document).ready(function() {
-    $('#main_table').dataTable({
-        "bPaginate": false,
-        "bLengthChange": false,
-        "bProcessing": true
-    });
-});
+function handleDragLeave(event) {
+    $('#drop-box').removeClass('dragover');
+	event.stopPropagation();
+    return false
+}
+
+function deleteRecord(obj){
+	table.fnDeleteRow(obj.parentNode.parentNode);
+}
