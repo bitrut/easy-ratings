@@ -1,78 +1,79 @@
-<!doctype html>
+<html ondragenter="handleDragEnter(event)"
+	  ondragleave="handleDragLeave(event)"
+	  ondragover="return false;"
+	  ondrop="handleDrop(event)">
+	  
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<!--[if lt IE 7]><html class="no-js ie6 oldie" lang=en><![endif]-->
-<!--[if IE 7]><html class="no-js ie7 oldie" lang=en><![endif]-->
-<!--[if IE 8]><html class="no-js ie8 oldie" lang=en><![endif]-->
-<!--[if gt IE 8]><!--> <html class=no-js lang=en ondragenter="return false;" ondragover="return false;" ondrop="return handleDrop(event);"> <!--<![endif]-->
-    <head>
-        <meta charset=utf-8>
+	<title>Easy Ratings</title>
+	<meta name="description" content="Get info and ratings of your movies by simple drag&amp;drop your files.">
+	<meta name="author" content="Paweł Kowalski">
 
-        
-        <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <title>Easy Ratings</title>
-        <meta name=description content="Get info and ratings of your movies by simple drag&amp;drop your files.">
-        <meta name=author content="Paweł Kowalski">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+	<link rel="stylesheet" href="css/custom.css">
 
-        
-        <meta name=viewport content="width=device-width, initial-scale=1.0">
-
-        
-
-        
-        <link rel=stylesheet href="css/84ca51bf917c7e84eb7a31d770ce08a96c0ea943.css">
-        <link rel=stylesheet type="text/css" href="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/css/demo_table.css"/>
-
-        
-
-        
-        <script src="js/libs/modernizr-2.0.min.js"></script>
-        <script src="js/libs/respond.min.js"></script>
-    </head>
-
-    <body>
-
-        <div id=container>
-            <header>
-
-            </header>
-            <div id=main role=main>
-                <div id=demo>
-                    <table class=display id=main_table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Year</th>
-                                <th>Genre</th>
-                                <th>Director</th>
-                                <th>Actors</th>
-                                <th>Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <footer>
-
-            </footer>
-        </div> 
+	<script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+<body>
 
 
-        
+<header>
+<div class="topbar">
+	<div class="fill">
+		<div class="container-fluid">
+		  <a class="brand" href="/">Easy Ratings</a>
+		  <p class="pull-left">Powered by <a href="http://imdbapi.com">The IMDb API</a></p>
+		  <p class="pull-right">&copy <a href="http://pawelkowalski.info">Paweł Kowalski</a> 2011</p>		  
+		</div>
+	</div>
+</div>
+</header>
+<div id="message-box" class="container"></div>
 
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-        <script>window.jQuery||document.write('<script src="js/libs/jquery-1.6.1.min.js"><\/script>');</script>
-        <script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.7.5/media/js/jquery.dataTables.min.js"></script>
+<div class="container-fluid">
+	<table id="main-table" class="zebra-striped">
+		<thead>
+			<tr>
+				<th class="header">Title</th>
+				<th class="header">Year</th>
+				<th class="header">Genre</th>
+				<th class="header">Director</th>
+				<th class="header">Actors</th>
+				<th class="header">Rating</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
 
 
-        <script src='js/fac42db95ab8f3f2240c6e5d54b439c28650d6f8.js'></script>
+<div id="drop-box"><h2>Drop your movie files or folders here</h2></div>
 
 
-        
-        <script>var _gaq=[["_setAccount","UA-8177602-6"],["_trackPageview"],["_trackPageLoadTime"]];(function(e,a){var c=e.createElement(a),b=e.getElementsByTagName(a)[0];c.async=1;c.src=("https:"==location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";b.parentNode.insertBefore(c,b)}(document,"script"));</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.8.2/media/js/jquery.dataTables.min.js"></script>
+<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
+<script>
+	var _gaq=[['_setAccount','UA-8177602-6'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+	g.src=('https:'==location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
-    </body>
+<!--[if lt IE 7 ]>
+	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+<![endif]-->
+
+</body>
 </html>
