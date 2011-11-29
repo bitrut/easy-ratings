@@ -15,8 +15,8 @@ function filenameToYear(filename) {
     return year;
 }
 function filenameToTitle(filename) {
-    filename = filename.replace(/(\d{4}|\[|\(|dvd|bdrip|r5).*/i, '');	
-    filename = filename.replace(/[\.\s]/g, '+');
+    filename = filename.replace(/(\[|\(|dvd|brrip|bdrip|tvrip|r5).*/i, '')
+            .replace(/\d{4}/i,'').replace(/[\.\s]/g, '+');
     return filename;
 }
 function filenameToUrl(filename) {
