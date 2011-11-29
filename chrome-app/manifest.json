@@ -1,0 +1,14 @@
+{
+  "name": "Easy Ratings",
+  "description": "Get movie info from IMDb by simple drag'n'drop your movie files or folders.",
+  "version": "1.0.1",
+  "icons": { "128": "128.png" },
+  "app": {
+    "urls": [
+      "http://easy-ratings.com/"
+    ],
+    "launch": {
+      "web_url": "http://easy-ratings.com/"
+    }
+  }
+}
