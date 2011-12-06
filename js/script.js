@@ -5,7 +5,11 @@ $(document).ready(function() {
 	$.fn.dataTableExt.oStdClasses.sSortDesc  = "headerSortDown";
 
     $('#main-table').dataTable({
-        "bPaginate": false
+        "bPaginate": false,
+        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+            nRow.className='fade in';
+            return nRow;
+        }
     });
 });
 
@@ -37,16 +41,18 @@ function getMovieInfo(file) {
 				data.Year, data.Genre, data.Director, data.Actors, data.Rating,
 				'<a class="close" href="#" onclick="deleteRecord(this)">&times;</a>'] );
 		} else {
-			$('#message-box').append('<div class="alert-message error" data-alert="alert">\
+			var error = $('<div class="alert-message error hide fade in" data-alert="alert">\
 				<a class="close" href="#">&times;</a>\
 				<p>Oh snap! Info for <strong>'+file['name']+'</strong> couldn\'t be found.</p>\
 				</div>');
+            error.appendTo('#message-box');
+            error.fadeIn();
 		}
     });
 }
 function handleDrop(event) {
 	$('#drop-box').hide();
-	$('#main-table_wrapper').show();
+	$('#main-table_wrapper').fadeIn();
     var files = event.dataTransfer.files;
     timeout = 0;
     for (var i = 0, f; f = files[i]; i++) {
@@ -71,5 +77,11 @@ function handleDragLeave(event) {
 }
 
 function deleteRecord(obj){
-	table.fnDeleteRow(obj.parentNode.parentNode);
+    var toRemove = obj.parentNode.parentNode
+	table.fnDeleteRow(toRemove, function(){
+        $(toRemove).fadeOut('fast', function(){
+            table.fnDraw();
+        });        
+    },
+    false);
 }
