@@ -1,8 +1,8 @@
 table = $('#main-table');
 
 $(document).ready(function() {
-	$.fn.dataTableExt.oStdClasses.sSortAsc  = "headerSortUp";
-	$.fn.dataTableExt.oStdClasses.sSortDesc  = "headerSortDown";
+	$.fn.dataTableExt.oStdClasses.sSortAsc  = "header headerSortDown";
+	$.fn.dataTableExt.oStdClasses.sSortDesc  = "header headerSortUp";
 
     $('#main-table').dataTable({
         "bPaginate": false,
@@ -11,6 +11,11 @@ $(document).ready(function() {
             return nRow;
         }
     });
+
+    $("#filter").keyup( function () {        
+        table.fnFilter(this.value);
+    } );
+        
 });
 
 
@@ -53,6 +58,7 @@ function getMovieInfo(file) {
 function handleDrop(event) {
 	$('#drop-box').hide();
 	$('#main-table_wrapper').fadeIn();
+    $('#filter').fadeIn();
     var files = event.dataTransfer.files;
     timeout = 0;
     for (var i = 0, f; f = files[i]; i++) {
