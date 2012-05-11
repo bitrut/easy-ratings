@@ -42,7 +42,7 @@ function getMovieInfo(file) {
     $.getJSON(file['url'], function(data){
 		if (data["Response"]!="Parse Error"){
 			table.dataTable().
-			fnAddData( ['<a class="title" href="http://www.imdb.com/title/'+data.ID+'/" title="'+file["name"]+'">'+data.Title+'</a>',
+			fnAddData( ['<a class="title" href="http://www.imdb.com/title/'+data.imdbID+'/" title="'+file["name"]+'">'+data.Title+'</a>',
 				data.Year, data.Genre, data.Director, data.Actors, data.imdbRating,
 				'<a class="close" href="#" onclick="deleteRecord(this)">&times;</a>'] );
 		} else {
