@@ -12,10 +12,10 @@ $(document).ready(function() {
         }
     });
 
-    $("#filter").keyup( function () {        
+    $("#filter").keyup( function () {
         table.fnFilter(this.value);
     } );
-        
+
 });
 
 
@@ -43,7 +43,7 @@ function getMovieInfo(file) {
 		if (data["Response"]!="Parse Error"){
 			table.dataTable().
 			fnAddData( ['<a class="title" href="http://www.imdb.com/title/'+data.ID+'/" title="'+file["name"]+'">'+data.Title+'</a>',
-				data.Year, data.Genre, data.Director, data.Actors, data.Rating,
+				data.Year, data.Genre, data.Director, data.Actors, data.imdbRating,
 				'<a class="close" href="#" onclick="deleteRecord(this)">&times;</a>'] );
 		} else {
 			var error = $('<div class="alert-message error hide fade in" data-alert="alert">\
@@ -87,7 +87,7 @@ function deleteRecord(obj){
 	table.fnDeleteRow(toRemove, function(){
         $(toRemove).fadeOut('fast', function(){
             table.fnDraw();
-        });        
+        });
     },
     false);
 }
