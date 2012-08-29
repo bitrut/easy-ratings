@@ -1,81 +1,64 @@
-<html ondragenter="handleDragEnter(event)"
-	  ondragleave="handleDragLeave(event)"
-	  ondragover="return false;"
-	  ondrop="handleDrop(event)">
-	  
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!DOCTYPE html>
+<html lang="en">
 
-	<title>Easy Ratings</title>
-	<meta name="description" content="Get info and ratings of your movies by simple drag&amp;drop your files.">
-	<meta name="author" content="Paweł Kowalski">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Easy Ratings</title>
+		<meta name="description" content="Get info and ratings of your movies by simple drag&amp;drop your files.">
+		<meta name="author" content="bitrut">
+		<!-- <link rel="stylesheet" href="http://bootswatch.com/spacelab/bootstrap.min.css"> -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-combined.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="shortcut icon" href="favicon.ico">
+	</head>
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
-	<link rel="stylesheet" href="css/custom.css">
-
-	<script src="js/libs/modernizr-2.0.6.min.js"></script>
-	<link rel="shortcut icon" href="favicon.ico">
-</head>
-<body>
-
-
-<header>
-	<div class="topbar">
-		<div class="topbar-inner">
-			<div class="container-fluid">
-			  <h2><a class="brand" href="/">Easy Ratings</a></h2>
-			  <p class="pull-left">Powered by <a href="http://imdbapi.com">The IMDb API</a></p>		  
-			  <p class="pull-right">&copy <a href="http://pawelkowalski.info">Paweł Kowalski</a> 2011</p>
-			  <input type="text" placeholder="Search" id="filter" class="pull-right">
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="brand" href="/">Easy Ratings</a>
+					<p class="navbar-text pull-left">Powered by <a href="http://imdbapi.com">IMDBAPI</a></p>
+					<p class="navbar-text pull-left">Created by <a href="http://github.com/bitrut/easy-ratings">bitrut</a></p>
+					<form class="navbar-form pull-right">
+					  	<input type="text" placeholder="Search" id="filter" class="search-query">
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</header>
-<div id="message-box" class="container"></div>
 
-<div class="container-fluid">
-	<table id="main-table" class="zebra-striped">
-		<thead>
-			<tr>
-				<th class="header">Title</th>
-				<th class="header">Year</th>
-				<th class="header">Genre</th>
-				<th class="header">Director</th>
-				<th class="header">Actors</th>
-				<th class="header">Rating</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-</div>
+		<div id="message-box" class="container"></div>
 
+		<div class="container-fluid">
+			<table id="main-table" class="zebra-striped">
+				<thead>
+					<tr>
+						<th class="header">Title</th>
+						<th class="header">Year</th>
+						<th class="header">Genre</th>
+						<th class="header">Director</th>
+						<th class="header">Actors</th>
+						<th class="header">Rating</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
 
-<div id="drop-box"><h2>Drop your movie files or folders here</h2></div>
+		<div id="drop-box"><h2>Drop your movie files or folders here</h2></div>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-<script src="js/plugins.js"></script>
-<script src="js/script.js"></script>
-<script src="http://dl.dropbox.com/u/906601/cdn/DataTables-1.8.2/media/js/jquery.dataTables.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
-<script>
-	var _gaq=[['_setAccount','UA-8177602-6'],['_trackPageview']];
-	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-	g.src=('https:'==location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
-	s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->
-
-</body>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/script.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.2/jquery.dataTables.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/js/bootstrap.min.js"></script>
+		<script>
+			var _gaq=[['_setAccount','UA-8177602-6'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+			g.src=('https:'==location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+	</body>
 </html>
