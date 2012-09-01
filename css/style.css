@@ -1,9 +1,9 @@
 html{height:100%}
 body{padding-top:50px}
 .navbar-text{margin-right: 20px; font-size: small;}
-#drop-box{position:fixed;width:500px;height:120px;left:50%;top:50%;margin-left:-250px;margin-top:-60px;text-align:center;z-index:-1}
-#drop-box.dragover h2{color:#0B0}
-#drop-box h2{font-size:50px;line-height:60px;}
+#dropbox{position:fixed;width:500px;height:120px;left:50%;top:50%;margin-left:-250px;margin-top:-60px;text-align:center;z-index:-1}
+#dropbox.dragover h2{color:#0B0}
+#dropbox h2{font-size:50px;line-height:60px;}
 #main-table_wrapper{display:none;}
 #main-table a.title{font-weight:bold}
 #main-table_filter{display:none;}

@@ -40,14 +40,14 @@ function filenameToUrl(filename) {
 }
 function getMovieInfo(file) {
     $.getJSON(file['url'], function(data){
-		if (data["Response"]!="Parse Error"){
+		if (data["Response"]!="False"){
 			table.dataTable().
 			fnAddData( ['<a class="title" href="http://www.imdb.com/title/'+data.imdbID+'/" title="'+file["name"]+'">'+data.Title+'</a>',
 				data.Year, data.Genre, data.Director, data.Actors, data.imdbRating,
 				'<a class="close" href="#" onclick="deleteRecord(this)">&times;</a>'] );
 		} else {
-			var error = $('<div class="alert-message error hide fade in" data-alert="alert">\
-				<a class="close" href="#">&times;</a>\
+			var error = $('<div class="alert alert-error hide fade in">\
+				<button type="button" class="close" data-dismiss="alert">×</button>\
 				<p>Oh snap! Info for <strong>'+file['name']+'</strong> couldn\'t be found.</p>\
 				</div>');
             error.appendTo('#message-box');
@@ -56,7 +56,8 @@ function getMovieInfo(file) {
     });
 }
 function handleDrop(event) {
-	$('#drop-box').hide();
+    event.preventDefault();
+	$('#dropbox').hide();
 	$('#main-table_wrapper').fadeIn();
     $('#filter').fadeIn();
     var files = event.dataTransfer.files;
@@ -71,13 +72,13 @@ function handleDrop(event) {
 }
 
 function handleDragEnter(event) {
-    $('#drop-box').addClass('dragover');
+    $('#dropbox').addClass('dragover');
 	event.stopPropagation();
     return false;
 }
 
 function handleDragLeave(event) {
-    $('#drop-box').removeClass('dragover');
+    $('#dropbox').removeClass('dragover');
 	event.stopPropagation();
     return false
 }

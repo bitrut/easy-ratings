@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)" ondragover="return false;" ondrop="handleDrop(event)">
 
 	<head>
 		<meta charset="utf-8">
@@ -21,7 +21,7 @@
 					<p class="navbar-text pull-left">Powered by <a href="http://imdbapi.com">IMDBAPI</a></p>
 					<p class="navbar-text pull-left">Created by <a href="http://github.com/bitrut/easy-ratings">bitrut</a></p>
 					<form class="navbar-form pull-right">
-					  	<input type="text" placeholder="Search" id="filter" class="search-query">
+					  	<input type="text" placeholder="Search" id="filter" class="search-query" ng-model="filter">
 					</form>
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 		<div id="message-box" class="container"></div>
 
 		<div class="container-fluid">
-			<table id="main-table" class="zebra-striped">
+			<table id="main-table" class="table table-striped">
 				<thead>
 					<tr>
 						<th class="header">Title</th>
@@ -47,7 +47,7 @@
 			</table>
 		</div>
 
-		<div id="drop-box"><h2>Drop your movie files or folders here</h2></div>
+		<div id="dropbox"><h2>Drop your movie files or folders here</h2></div>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="js/plugins.js"></script>
